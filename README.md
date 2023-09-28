@@ -70,3 +70,10 @@
 ├── README.md
 └── server.js
 ```
+
+
+09/26 : express 기본설정 및 html 생성
+
+09/27 : 테스트용 DB 추가 및 list구현
+
+09/28 : view구현
