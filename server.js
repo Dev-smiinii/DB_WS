@@ -13,6 +13,10 @@ app.use(express.urlencoded({extended: true}))
 
 app.use(router)
 
+// app.use((err,req,res,next)=>{
+//     res.status(500).JSON({err: err.message})
+// })
+
 app.listen(3000, async()=>{
     console.log(`server start`)
     try{    

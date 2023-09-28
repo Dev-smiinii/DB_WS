@@ -1,13 +1,10 @@
 const express = require('express')
 const router = express.Router()
+const boardController = require('./board.controller')
 
-router.get('/list',(req,res)=>{
-    res.render('board/list.html')
-})
+router.get('/list',boardController.getList)
 
-router.get('/view',(req,res)=>{
-    res.render('board/view.html')
-})
+router.get('/view',boardController.getView)
 
 router.get('/modify',(req,res)=>{
     res.render('board/modify.html')

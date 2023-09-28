@@ -15,13 +15,15 @@
             <th>작성일</th>
             <th>조회수</th>
         </tr>
+        {% for data in list %}
         <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>{{data.id}}</td>
+            <td><a href="/boards/view?id={{data.id}}">{{data.title}}</a></td>
+            <td>{{data.writer}}</td>
+            <td>{{data.created_at}}</td>
+            <td>{{data.hit}}</td>
         </tr>
+        {% endfor %}
     </table>
     <a href="/boards/write">글쓰기</a>
 </body>
