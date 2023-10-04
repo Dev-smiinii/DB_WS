@@ -6,14 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/boards/modify" method="post">
-        <ul>
-            <li>
-                제목<input type="text">
-            </li>
-            <li>writer</li>
-            <input type="text">
-        </ul>
+    <form action="/boards/modify?id={{id}}" method="post">
+
+            
+    <p>제목 : <input type="text" name="title" value="{{title}}"></p>
+    <p>작성자 : {{writer}}</p>
+    <textarea name="content">{{content}}</textarea>
+
     </form>
     <button type="submit">저장</button>
 </body>

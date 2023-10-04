@@ -3,7 +3,8 @@ const router = express.Router()
 const userRouter = require('./user/user.route')
 const boardRouter = require('./board/board.route')
 
-router.get('/',(req,res)=>{
+router.get('/', (req,res) => {
+    console.log(req.body)
     res.render('index.html')
 })
 
