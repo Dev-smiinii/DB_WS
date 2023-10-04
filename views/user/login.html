@@ -3,19 +3,36 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Login</title>
   </head>
   <body>
     <form action="/users/login" method="post">
       <ul>
         <li>
-          <input type="text" name="user_id" />
+          <!-- <h2>ID</h2> -->
+          <input
+            type="text"
+            name="user_id"
+            placeholder="ID를 입력해주세요."
+            required
+          />
         </li>
+        <br />
         <li>
-          <input type="text" name="user_pw" />
+          <!-- <h2>PW</h2> -->
+          <input
+            type="text"
+            name="user_pw"
+            placeholder="PW를 입력해주세요."
+            required
+          />
         </li>
+        <br />
       </ul>
-      <a href="/boards/list">로그인</a>
+      <button type="button" onclick="location.href='/boards/list'">
+        로그인
+      </button>
+      <!-- <a href="/boards/list">로그인</a> -->
     </form>
   </body>
 </html>
