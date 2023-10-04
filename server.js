@@ -19,11 +19,11 @@ app.use(router)
 
 app.listen(3000, async()=>{
     console.log(`server start`)
-    try{    
+    try {    
         const connection = await pool.getConnection()
         console.log('Connection to the database!')
         connection.release()
-    } catch (e){
+    } catch (e) {
         console.log('DB Connection Error')
     }
 })
