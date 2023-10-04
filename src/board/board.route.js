@@ -1,20 +1,19 @@
-const express = require('express')
-const router = express.Router()
-const boardController = require('./board.controller')
+const express = require("express");
+const router = express.Router();
+const boardController = require("./board.controller");
 
-router.get('/list', boardController.getList)
+router.get("/list", boardController.getList);
 
-router.get('/view', boardController.getView)
+router.get("/view", boardController.getView);
 
-router.get('/modify', boardController.getModify)
+router.get("/modify", boardController.getModify);
 
-router.get('/write', boardController.getWrite)
+router.get("/write", boardController.getWrite);
 
-router.post('/modify', boardController.postModify)
+router.post("/modify", boardController.postModify);
 
-router.post('/write', boardController.postWrite)
+router.post("/write", boardController.postWrite);
 
-router.post('/delete',)
+router.post("/delete", boardController.postDelete);
 
-
-module.exports = router
+module.exports = router;
