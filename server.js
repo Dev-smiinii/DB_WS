@@ -4,6 +4,7 @@ const pool = require("./pool");
 const nunjucks = require("nunjucks");
 const router = require("./src/index");
 const cookieParser = require("cookie-parser");
+const middleware = require("./src/auth/auth.middleware");
 
 app.set("view engine", "html");
 nunjucks.configure("views", {
@@ -12,12 +13,13 @@ nunjucks.configure("views", {
 
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(middleware.auth);
 
 app.use(router);
 
-app.use((err, req, res, next) => {
-  res.status(500).JSON({ err: err.message });
-});
+// app.use((err, req, res, next) => {
+//   res.status(500).JSON({ err: err.message });
+// });
 
 app.listen(3000, async () => {
   console.log(`server start`);
