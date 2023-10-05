@@ -48,13 +48,11 @@ exports.newUserJoin = async (data) => {
       new_user_pw
     );
     return result;
-    // return;
   } catch (err) {
     throw new Error(err.message);
   }
 };
 
-// 변경 후 - userDelete 추가분(명칭 수정해야할 수도??)
 exports.userDelete = async (userid) => {
   try {
     const result = await userRepository.deleteUserData(userid);

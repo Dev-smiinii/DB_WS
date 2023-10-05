@@ -47,7 +47,6 @@ exports.postUserModify = async (req, res, next) => {
     const { modify_pw } = req.body;
     const result = await userService.userUpdate(userid, modify_pw);
     res.redirect(`/users/userinfo`);
-    // res.redirect(`/users/userinfo?userid=${result.id}`);
   } catch (e) {
     next();
   }
