@@ -4,7 +4,7 @@ const userRouter = require("./user/user.route");
 const boardRouter = require("./board/board.route");
 
 router.get("/", (req, res) => {
-  console.log("index router :", req.user);
+  // console.log("index router :", req.user);
   res.render("index.html", { user: req.user });
 });
 

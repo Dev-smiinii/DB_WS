@@ -1,3 +1,5 @@
+const JWT = require("../../lib/jwt");
+const jwt = new JWT();
 const userService = require("./user.service");
 
 exports.getLogin = (req, res) => {
@@ -13,6 +15,44 @@ exports.getLogout = (req, res) => {
   res.redirect("/");
 };
 
+exports.getUserInfo = async (req, res, next) => {
+  try {
+    const { token } = req.cookies;
+    const payload = jwt.verify(token, "jsk1234");
+    const userid = payload.id;
+    const result = await userService.getFindOne(userid);
+    res.render("user/user_info.html", { ...result });
+  } catch (e) {
+    next();
+  }
+};
+
+exports.getUserModify = async (req, res, next) => {
+  try {
+    const { token } = req.cookies;
+    const payload = jwt.verify(token, "jsk1234");
+    const userid = payload.id;
+    const result = await userService.getFindOne(userid);
+    res.render("user/user_info_modify.html", { ...result });
+  } catch (e) {
+    next();
+  }
+};
+
+exports.postUserModify = async (req, res, next) => {
+  try {
+    const { token } = req.cookies;
+    const payload = jwt.verify(token, "jsk1234");
+    const userid = payload.id;
+    const { modify_pw } = req.body;
+    const result = await userService.userUpdate(userid, modify_pw);
+    res.redirect(`/users/userinfo`);
+    // res.redirect(`/users/userinfo?userid=${result.id}`);
+  } catch (e) {
+    next();
+  }
+};
+
 exports.postLogin = async (req, res, next) => {
   try {
     const { user_id, user_pw } = req.body;
@@ -22,7 +62,7 @@ exports.postLogin = async (req, res, next) => {
     res.cookie(
       "token",
       result.data,
-      (maxAge = 60 * 100),
+      (maxAge = 60 * 10),
       (domain = "127.0.0.1"),
       (path = "/")
     );
@@ -38,6 +78,19 @@ exports.postJoin = async (req, res, next) => {
     const data = req.body;
     await userService.newUserJoin(data);
     res.redirect("/users/login");
+  } catch (e) {
+    next(e);
+  }
+};
+
+exports.postDelete = async (req, res, next) => {
+  try {
+    const { token } = req.cookies;
+    const payload = jwt.verify(token, "jsk1234");
+    const userid = payload.id;
+    const result = await userService.userDelete(userid);
+    res.clearCookie("token");
+    res.redirect("/");
   } catch (e) {
     next(e);
   }

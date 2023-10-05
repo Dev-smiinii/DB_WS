@@ -22,6 +22,24 @@ exports.findOneByUserId = async (userid) => {
   }
 };
 
+exports.userUpdate = async (userid, modify_pw) => {
+  try {
+    const result = await userRepository.update(userid, modify_pw);
+    return result;
+  } catch (err) {
+    throw new Error("service err" + err.message);
+  }
+};
+
+exports.getFindOne = async (userid) => {
+  try {
+    const result = await userRepository.userFindOne(userid);
+    return result;
+  } catch (err) {
+    throw new Error("service err" + err.message);
+  }
+};
+
 exports.newUserJoin = async (data) => {
   const { new_user_id, new_user_pw } = data;
   try {
@@ -33,5 +51,15 @@ exports.newUserJoin = async (data) => {
     // return;
   } catch (err) {
     throw new Error(err.message);
+  }
+};
+
+// 변경 후 - userDelete 추가분(명칭 수정해야할 수도??)
+exports.userDelete = async (userid) => {
+  try {
+    const result = await userRepository.deleteUserData(userid);
+    return result;
+  } catch (err) {
+    throw new Error("service err" + err.message);
   }
 };

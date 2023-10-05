@@ -6,16 +6,9 @@
     <title>Document</title>
   </head>
   <body>
-    <form action="/boards/write" method="post">
-      <ul>
-        <li>
-          <input type="text" name="title" />
-        </li>
-        <li>
-          <input type="text" name="writer" />
-        </li>
-        <textarea name="content"></textarea>
-      </ul>
+    <form action="/users/usermodify" method="post">
+      <p>ID : <input type="text" name="modify_id" value="{{userid}}" /></p>
+      <p>PW : <input type="password" name="modify_pw" value="{{userpw}}" /></p>
       <button type="submit">저장</button>
     </form>
     <a href="/users/logout">로그아웃</a>
