@@ -1,5 +1,6 @@
 const boardService = require("./board.service");
 
+// 글 목록
 exports.getList = async (req, res, next) => {
   try {
     const result = await boardService.getFindAll();
@@ -11,6 +12,7 @@ exports.getList = async (req, res, next) => {
   }
 };
 
+// 글 보기
 exports.getView = async (req, res, next) => {
   try {
     const { id } = req.query;
@@ -21,6 +23,7 @@ exports.getView = async (req, res, next) => {
   }
 };
 
+// 글 쓰기
 exports.getWrite = (req, res) => {
   res.render("board/write.html");
 };
@@ -35,6 +38,7 @@ exports.postWrite = async (req, res, next) => {
   }
 };
 
+// 글 수정
 exports.getModify = async (req, res, next) => {
   try {
     const { id } = req.query;
@@ -56,6 +60,7 @@ exports.postModify = async (req, res, next) => {
   }
 };
 
+// 글 삭제
 exports.postDelete = async (req, res, next) => {
   try {
     const id = req.query.id;

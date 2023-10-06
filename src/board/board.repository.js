@@ -1,5 +1,6 @@
 const pool = require("../../pool");
 
+// 글 목록
 exports.findAll = async () => {
   try {
     const sql = `SELECT * FROM boards`;
@@ -11,6 +12,7 @@ exports.findAll = async () => {
   }
 };
 
+// 글 보기
 exports.findOne = async (id) => {
   try {
     const sql = `SELECT * FROM boards WHERE id=?`;
@@ -28,6 +30,7 @@ exports.incrementId = async (id) => {
   await pool.query(index, [id]);
 };
 
+// 글 수정
 exports.create = async (title, writer, content) => {
   try {
     const sql = "INSERT INTO boards(title, writer, content) values(?, ?, ?)";
@@ -50,6 +53,7 @@ exports.update = async (id, title, content) => {
   }
 };
 
+// 글 삭제
 exports.delete = async (id) => {
   try {
     const sql = "DELETE FROM boards WHERE id=?";

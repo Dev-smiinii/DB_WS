@@ -19,7 +19,7 @@ router.get("/usermodify", userController.getUserModify);
 
 router.post("/usermodify", userController.postUserModify);
 
-// 쿠키삭제 및 db삭제
+// 로그아웃 / 회원탈퇴
 router.get("/logout", userController.getLogout);
 
 router.post("/delete", userController.postDelete);

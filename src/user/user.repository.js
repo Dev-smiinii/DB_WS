@@ -1,5 +1,6 @@
 const pool = require("../../pool");
 
+// 로그인
 exports.findOneByUserInfo = async (user_id, user_pw) => {
   try {
     const sql = "SELECT * FROM user_info WHERE userid=? AND userpw=?";
@@ -10,6 +11,19 @@ exports.findOneByUserInfo = async (user_id, user_pw) => {
   }
 };
 
+// 회원가입
+exports.createUserData = async (user_id, user_pw) => {
+  try {
+    const sql = "INSERT INTO user_info(userid, userpw) VALUES(?, ?)";
+    const [result] = await pool.query(sql, [user_id, user_pw]);
+    return { user_id: result.insertUserId };
+    // return { id: result.insertId };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+// 회원정보 및 수정
 exports.findOne = async (field, value) => {
   try {
     const sql = `SELECT * FROM user_info WHERE ${field}`;
@@ -40,16 +54,7 @@ exports.update = async (userid, modify_pw) => {
   }
 };
 
-exports.createUserData = async (user_id, user_pw) => {
-  try {
-    const sql = "INSERT INTO user_info(userid, userpw) VALUES(?, ?)";
-    const [result] = await pool.query(sql, [user_id, user_pw]);
-    return { user_id: result.insertUserId };
-    // return { id: result.insertId };
-  } catch (err) {
-    throw new Error(err.message);
-  }
-};
+// 로그아웃 및 회원탈퇴
 exports.deleteUserData = async (userid) => {
   try {
     const sql = "DELETE FROM user_info WHERE userid=?";
