@@ -1,6 +1,16 @@
 const pool = require("../../pool");
 
 // 글 목록
+exports.findAllAnnounce = async () => {
+  try {
+    const sql = `SELECT * FROM announce`;
+    const [result] = await pool.query(sql);
+    return result;
+  } catch (err) {
+    throw new Error("repo err" + err.message);
+  }
+};
+
 exports.findAll = async () => {
   try {
     const sql = `SELECT * FROM boards`;
@@ -17,8 +27,6 @@ exports.findOne = async (id) => {
   try {
     const sql = `SELECT * FROM boards WHERE id=?`;
     const [result] = await pool.query(sql, [id]);
-    console.log(result);
-
     return result;
   } catch (err) {
     throw new Error("repo err" + err.message);
@@ -35,8 +43,6 @@ exports.create = async (title, writer, content) => {
   try {
     const sql = "INSERT INTO boards(title, writer, content) values(?, ?, ?)";
     const [result] = await pool.query(sql, [title, writer, content]);
-    console.log(result);
-
     return { id: result.insertId };
   } catch (err) {
     throw new Error("repo err: " + err.message);

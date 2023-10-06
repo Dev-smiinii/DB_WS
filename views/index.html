@@ -6,6 +6,20 @@
     <title>Document</title>
   </head>
   <body>
+    <table>
+      <tr>
+        <th>번호</th>
+        <th>제목</th>
+        <th>게시일</th>
+      </tr>
+      {%for data in announceList%}
+      <tr>
+        <td>{{data.id}}</td>
+        <td><a href="/boards/view?id={{data.id}}">{{data.title}}</a></td>
+        <td>{{data.created_at}}</td>
+      </tr>
+      {%endfor%}
+    </table>
     <a href="/users/login">로그인</a>
     <a href="/users/join">회원가입</a>
   </body>

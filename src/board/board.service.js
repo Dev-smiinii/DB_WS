@@ -1,6 +1,15 @@
 const boardRepository = require("./board.repository");
 
 // 글 목록
+exports.getFindAllAnnounce = async () => {
+  try {
+    const result = await boardRepository.findAllAnnounce();
+    return result;
+  } catch (err) {
+    throw new Error("service err" + err.message);
+  }
+};
+
 exports.getFindAll = async () => {
   try {
     const result = await boardRepository.findAll();

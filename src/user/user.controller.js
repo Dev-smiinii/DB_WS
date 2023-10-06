@@ -9,18 +9,10 @@ exports.getLogin = (req, res) => {
 
 exports.postLogin = async (req, res, next) => {
   try {
-    const { user_id, user_pw } = req.body;
-    const result = await userService.userLogin(user_id, user_pw);
-    if (!result.isLogin) return res.redirect("/");
-
-    res.cookie(
-      "token",
-      result.data,
-      (maxAge = 60 * 10),
-      (domain = "127.0.0.1"),
-      (path = "/")
-    );
-
+    const data = req.body;
+    const result = await userService.userLogin(data);
+    if (!result.isLogin) return res.render("user/login.html", { alert: true });
+    res.cookie("token", result.data);
     res.redirect("/boards/list");
   } catch (e) {
     next(e);
@@ -34,8 +26,23 @@ exports.getJoin = (req, res) => {
 
 exports.postJoin = async (req, res, next) => {
   try {
-    const data = req.body;
-    await userService.newUserJoin(data);
+    const { new_user_id, new_user_pw } = req.body;
+    const regex = /^[0-9a-zA-Z]*$/;
+
+    if (!regex.test(new_user_id) || !regex.test(new_user_pw))
+      return res.render("user/join.html", {
+        alert: true,
+        alertType: "invaild",
+      });
+
+    const result = await userService.userOverlap(new_user_id);
+    if (result)
+      return res.render("user/join.html", {
+        alert: true,
+        alertType: "overlap",
+      });
+
+    await userService.newUserJoin(new_user_id, new_user_pw);
     res.redirect("/users/login");
   } catch (e) {
     next(e);
@@ -47,6 +54,7 @@ exports.getUserInfo = async (req, res, next) => {
   try {
     const { token } = req.cookies;
     const payload = jwt.verify(token, "jsk1234");
+    console.log(payload);
     const userid = payload.id;
     const result = await userService.getFindOne(userid);
     res.render("user/user_info.html", { ...result });
@@ -61,6 +69,7 @@ exports.getUserModify = async (req, res, next) => {
     const payload = jwt.verify(token, "jsk1234");
     const userid = payload.id;
     const result = await userService.getFindOne(userid);
+    console.log(result);
     res.render("user/user_info_modify.html", { ...result });
   } catch (e) {
     next();
@@ -74,6 +83,8 @@ exports.postUserModify = async (req, res, next) => {
     const userid = payload.id;
     const { modify_pw } = req.body;
     const result = await userService.userUpdate(userid, modify_pw);
+    console.log(result);
+
     res.redirect(`/users/userinfo`);
   } catch (e) {
     next();

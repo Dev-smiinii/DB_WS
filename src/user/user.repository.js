@@ -16,8 +16,16 @@ exports.createUserData = async (user_id, user_pw) => {
   try {
     const sql = "INSERT INTO user_info(userid, userpw) VALUES(?, ?)";
     const [result] = await pool.query(sql, [user_id, user_pw]);
-    return { user_id: result.insertUserId };
-    // return { id: result.insertId };
+  } catch (err) {
+    throw new Error(err.message);
+  }
+};
+
+exports.findOneByUserInfoOverlap = async (new_user_id) => {
+  try {
+    const sql = "SELECT * FROM user_info WHERE userid=?";
+    const [[result]] = await pool.query(sql, [new_user_id]);
+    return result;
   } catch (err) {
     throw new Error(err.message);
   }
@@ -48,7 +56,6 @@ exports.update = async (userid, modify_pw) => {
   try {
     const sql = `UPDATE user_info SET userid=?, userpw=? WHERE userid=?`;
     const [result] = await pool.query(sql, [userid, modify_pw, userid]);
-    return { id: result.insertId };
   } catch (err) {
     throw new Error("repo err" + err.message);
   }

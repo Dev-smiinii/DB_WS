@@ -1,12 +1,21 @@
 const boardService = require("./board.service");
+const JWT = require("../../lib/jwt");
+const jwt = new JWT();
 
 // 글 목록
+exports.getAnnounce = async (req, res, next) => {
+  try {
+    const result = await boardService.getFindAllAnnounce();
+    res.render("index.html", { announceList: result });
+  } catch (e) {
+    next();
+  }
+};
+
 exports.getList = async (req, res, next) => {
   try {
     const result = await boardService.getFindAll();
-    res.render("board/list.html", {
-      list: result,
-    });
+    res.render("board/list.html", { list: result });
   } catch (e) {
     next();
   }
@@ -25,7 +34,11 @@ exports.getView = async (req, res, next) => {
 
 // 글 쓰기
 exports.getWrite = (req, res) => {
-  res.render("board/write.html");
+  const { token } = req.cookies;
+  const payload = jwt.verify(token, "jsk1234");
+  const userid = payload.id;
+  res.render("board/write.html", { userid: userid });
+  console.log({ userid: userid });
 };
 
 exports.postWrite = async (req, res, next) => {
@@ -43,6 +56,8 @@ exports.getModify = async (req, res, next) => {
   try {
     const { id } = req.query;
     const [result] = await boardService.getFindOne(id);
+    console.log(result);
+
     res.render("board/modify.html", { ...result });
   } catch (e) {
     next();
@@ -54,6 +69,8 @@ exports.postModify = async (req, res, next) => {
     const data = req.body;
     data.id = req.query.id;
     const result = await boardService.listUpdate(data);
+    console.log(result);
+
     res.redirect(`/boards/view?id=${result.id}`);
   } catch (e) {
     next();

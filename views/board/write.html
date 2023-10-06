@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>WRITE</title>
   </head>
   <body>
     <form action="/boards/write" method="post">
@@ -11,9 +11,8 @@
         <li>
           <input type="text" name="title" />
         </li>
-        <li>
-          <input type="text" name="writer" />
-        </li>
+        <p>{{userid}}</p>
+        <input type="hidden" name="writer" value="{{userid}}" />
         <textarea name="content"></textarea>
       </ul>
       <button type="submit">저장</button>
