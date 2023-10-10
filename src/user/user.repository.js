@@ -34,7 +34,7 @@ exports.findOneByUserInfoOverlap = async (new_user_id) => {
 // 회원정보 및 수정
 exports.findOne = async (field, value) => {
   try {
-    const sql = `SELECT * FROM user_info WHERE ${field}`;
+    const sql = `SELECT * FROM user_info WHERE ${field}=?`;
     const [[result]] = await pool.query(sql, [value]);
     return result;
   } catch (err) {

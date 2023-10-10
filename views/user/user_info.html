@@ -6,13 +6,17 @@
     <title>USERINFO</title>
   </head>
   <body>
+    {% if user %}
     <p>ID : {{userid}}</p>
-    <input type="password" value="{{userpw}}" />
     <a href="/users/usermodify">수정</a>
     <form action="/users/delete" method="post">
       <button type="submit">탈퇴</button>
     </form>
     <a href="/boards/list">목록으로</a>
     <a href="/users/logout">로그아웃</a>
+    {% else %}
+    <p>로그인하세요.</p>
+    <a href="/">홈으로</a>
+    {% endif %}
   </body>
 </html>

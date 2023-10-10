@@ -6,6 +6,7 @@
     <title>VIEW</title>
   </head>
   <body>
+    {% if user %}
     <p>제목: {{title}}</p>
     <p>작성자: {{writer}}</p>
     <p>내용: {{content}}</p>
@@ -15,5 +16,9 @@
     </form>
     <a href="/boards/list">목록으로</a>
     <a href="/users/logout">로그아웃</a>
+    {% else %}
+    <p>로그인하세요</p>
+    <a href="/">홈으로</a>
+    {% endif %}
   </body>
 </html>

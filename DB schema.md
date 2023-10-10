@@ -27,10 +27,13 @@ INSERT INTO boards(title, writer, content) values('테스트 제목', '테스트
 
 ALTER TABLE user_info MODIFY userid varchar(30) NOT NULL;
 
-INSERT INTO user_info(userid, userpw, level) VALUES('masterID','master123','9');
+INSERT INTO user_info(userid, userpw, level) VALUES('admin','admin','9');
 
 ALTER TABLE user_info MODIFY level INT DEFAULT 0;
 
-DELETE FROM user_info WHERE userid NOT IN ('masterID', 'test');
+DELETE FROM user_info WHERE userid NOT IN ('admin', 'test');
 
+DELETE FROM boards WHERE id NOT IN ('1', '2');
+
+ALTER TABLE boards delete COLUMN writerid VARCHAR(30);
 ```

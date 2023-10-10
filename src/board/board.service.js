@@ -20,6 +20,15 @@ exports.getFindAll = async () => {
 };
 
 // 글 보기
+exports.getAnnounceFindOne = async (id) => {
+  try {
+    const result = await boardRepository.announceFindOne(id);
+    return result;
+  } catch (err) {
+    throw new Error("service err" + err.message);
+  }
+};
+
 exports.getFindOne = async (id) => {
   try {
     const result = await boardRepository.findOne(id);
@@ -32,9 +41,14 @@ exports.getFindOne = async (id) => {
 
 // 글 쓰기
 exports.listCreate = async (data) => {
-  const { title, writer, content } = data;
+  const { title, writer, content, writerid } = data;
   try {
-    const result = await boardRepository.create(title, writer, content);
+    const result = await boardRepository.create(
+      title,
+      writer,
+      content,
+      writerid
+    );
     return result;
   } catch (err) {
     throw new Error("service err" + err.message);

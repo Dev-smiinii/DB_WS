@@ -6,6 +6,7 @@
     <title>JOIN</title>
   </head>
   <body>
+    {% if alertType %}
     <script>
       let message;
       switch ("{{alertType}}") {
@@ -22,6 +23,7 @@
       }
       alert(message);
     </script>
+    {% endif %}
     <form action="/users/join" method="post">
       <ul>
         <li>
@@ -49,30 +51,8 @@
         </li>
         <br />
       </ul>
-      <button type="submit">중복확인</button>
       <button type="submit">회원가입</button>
       <a href="/">홈으로</a>
     </form>
-    <!-- <script>
-      window.onload = function () {
-        var error = getCookie("error");
-        if (error) {
-          alert(error);
-          deleteCookie("error");
-        }
-      };
-
-      function getCookie(name) {
-        var value = "; " + document.cookie;
-        var parts = value.split("; " + name + "=");
-
-        if (parts.length == 2) return parts.pop().split(";").shift();
-      }
-
-      function deleteCookie(name) {
-        document.cookie =
-          name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-      }
-    </script> -->
   </body>
 </html>

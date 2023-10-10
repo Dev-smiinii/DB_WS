@@ -6,10 +6,17 @@
     <title>WRITE</title>
   </head>
   <body>
+    {% if user %}
     <form action="/boards/write" method="post">
       <ul>
         <li>
-          <input type="text" name="title" />
+          <input
+            type="text"
+            name="title"
+            required
+            oninvalid="setCustomValidity('제목을 입력해주세요.')"
+            oninput="setCustomValidity('')"
+          />
         </li>
         <p>{{userid}}</p>
         <input type="hidden" name="writer" value="{{userid}}" />
@@ -18,5 +25,9 @@
       <button type="submit">저장</button>
     </form>
     <a href="/users/logout">로그아웃</a>
+    {% else %}
+    <p>로그인하세요.</p>
+    <a href="/">홈으로</a>
+    {% endif %}
   </body>
 </html>

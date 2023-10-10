@@ -31,7 +31,7 @@ exports.newUserJoin = async (new_user_id, new_user_pw) => {
 exports.userOverlap = async (new_user_id) => {
   try {
     const result = await userRepository.findOneByUserInfoOverlap(new_user_id);
-    return { infoOverlap: !!result };
+    return !!result;
   } catch (err) {
     throw new Error(err.message);
   }

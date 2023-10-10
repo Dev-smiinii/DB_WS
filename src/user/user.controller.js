@@ -36,6 +36,7 @@ exports.postJoin = async (req, res, next) => {
       });
 
     const result = await userService.userOverlap(new_user_id);
+
     if (result)
       return res.render("user/join.html", {
         alert: true,
@@ -43,6 +44,7 @@ exports.postJoin = async (req, res, next) => {
       });
 
     await userService.newUserJoin(new_user_id, new_user_pw);
+
     res.redirect("/users/login");
   } catch (e) {
     next(e);
@@ -53,11 +55,16 @@ exports.postJoin = async (req, res, next) => {
 exports.getUserInfo = async (req, res, next) => {
   try {
     const { token } = req.cookies;
+
+    if (!token) {
+      return res.render("user/user_info.html", { user: req.user });
+    }
+
     const payload = jwt.verify(token, "jsk1234");
-    console.log(payload);
     const userid = payload.id;
     const result = await userService.getFindOne(userid);
-    res.render("user/user_info.html", { ...result });
+    res.render("user/user_info.html", { ...result, user: req.user });
+    console.log(result);
   } catch (e) {
     next();
   }
@@ -66,11 +73,15 @@ exports.getUserInfo = async (req, res, next) => {
 exports.getUserModify = async (req, res, next) => {
   try {
     const { token } = req.cookies;
+
+    if (!token) {
+      return res.render("user/user_info_modify.html", { user: req.user });
+    }
     const payload = jwt.verify(token, "jsk1234");
     const userid = payload.id;
     const result = await userService.getFindOne(userid);
     console.log(result);
-    res.render("user/user_info_modify.html", { ...result });
+    res.render("user/user_info_modify.html", { ...result, user: req.user });
   } catch (e) {
     next();
   }
@@ -79,6 +90,10 @@ exports.getUserModify = async (req, res, next) => {
 exports.postUserModify = async (req, res, next) => {
   try {
     const { token } = req.cookies;
+
+    if (!token) {
+      return res.render("user/user_info_modify.html", { user: req.user });
+    }
     const payload = jwt.verify(token, "jsk1234");
     const userid = payload.id;
     const { modify_pw } = req.body;
@@ -102,7 +117,7 @@ exports.postDelete = async (req, res, next) => {
     const { token } = req.cookies;
     const payload = jwt.verify(token, "jsk1234");
     const userid = payload.id;
-    const result = await userService.userDelete(userid);
+    await userService.userDelete(userid);
     res.clearCookie("token");
     res.redirect("/");
   } catch (e) {

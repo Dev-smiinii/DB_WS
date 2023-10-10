@@ -6,6 +6,8 @@ router.get("/", boardController.getAnnounce);
 
 router.get("/list", boardController.getList);
 
+router.get("/announce", boardController.getAnnounceView);
+
 router.get("/view", boardController.getView);
 
 router.get("/modify", boardController.getModify);

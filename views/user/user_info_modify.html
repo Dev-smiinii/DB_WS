@@ -6,11 +6,16 @@
     <title>USERINFO</title>
   </head>
   <body>
+    {% if user %}
     <form action="/users/usermodify" method="post">
       <p>ID : <input type="text" name="modify_id" value="{{userid}}" /></p>
       <p>PW : <input type="password" name="modify_pw" value="{{userpw}}" /></p>
       <button type="submit">저장</button>
     </form>
     <a href="/users/logout">로그아웃</a>
+    {% else %}
+    <p>로그인하세요.</p>
+    <a href="/">홈으로</a>
+    {% endif %}
   </body>
 </html>

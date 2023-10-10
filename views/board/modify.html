@@ -6,12 +6,19 @@
     <title>MODIFY</title>
   </head>
   <body>
+    {% if user %}
     <form action="/boards/modify?id={{id}}" method="post">
-      <p>제목 : <input type="text" name="title" value="{{title}}" /></p>
+      <p>
+        제목 : <input type="text" name="title" value="{{title}}" required />
+      </p>
       <p>작성자 : {{writer}}</p>
       <textarea name="content">{{content}}</textarea>
       <button type="submit">저장</button>
     </form>
     <a href="/users/logout">로그아웃</a>
+    {% else %}
+    <p>로그인하세요</p>
+    <a href="/">홈으로</a>
+    {% endif %}
   </body>
 </html>

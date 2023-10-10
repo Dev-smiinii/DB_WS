@@ -4,10 +4,7 @@ const userRouter = require("./user/user.route");
 const boardRouter = require("./board/board.route");
 const boardController = require("./board/board.controller");
 
-router.get("/", (req, res) => {
-  // console.log("index router :", req.user);
-  res.render("index.html");
-});
+router.get("/", boardController.getAnnounce);
 
 router.use("/users", userRouter);
 router.use("/boards", boardRouter);

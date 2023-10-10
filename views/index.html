@@ -15,7 +15,11 @@
       {%for data in announceList%}
       <tr>
         <td>{{data.id}}</td>
-        <td><a href="/boards/view?id={{data.id}}">{{data.title}}</a></td>
+        <td>
+          <a href="/boards/announce?id={{data.id}}" target="_blank"
+            >{{data.title}}</a
+          >
+        </td>
         <td>{{data.created_at}}</td>
       </tr>
       {%endfor%}
