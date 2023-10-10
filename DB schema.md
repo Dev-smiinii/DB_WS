@@ -36,4 +36,19 @@ DELETE FROM user_info WHERE userid NOT IN ('admin', 'test');
 DELETE FROM boards WHERE id NOT IN ('1', '2');
 
 ALTER TABLE boards delete COLUMN writerid VARCHAR(30);
+
+SELECT
+    id,
+    title,
+    content,
+    writer,
+    hit,
+    IF(
+        TIMESTAMPDIFF(HOUR, created_at, NOW()) < 24,
+        DATE_FORMAT(created_at, '%H:%i:%s'),
+        DATE_FORMAT(created_at, '%Y-%m-%d')
+    ) AS formatted_date
+FROM boards;
+
+
 ```
