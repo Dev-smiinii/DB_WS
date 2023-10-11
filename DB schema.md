@@ -23,6 +23,10 @@ CREATE TABLE `boards` (
   `hit` integer DEFAULT 0
 );
 
+CREATE TABLE `comments` (
+
+)
+
 INSERT INTO boards(title, writer, content) values('테스트 제목', '테스트 계정', '테스트 내용'), ('테스트 제목2', '테스트 계정2', '테스트 내용2');
 
 ALTER TABLE user_info MODIFY userid varchar(30) NOT NULL;
@@ -37,18 +41,8 @@ DELETE FROM boards WHERE id NOT IN ('1', '2');
 
 ALTER TABLE boards delete COLUMN writerid VARCHAR(30);
 
-SELECT
-    id,
-    title,
-    content,
-    writer,
-    hit,
-    IF(
-        TIMESTAMPDIFF(HOUR, created_at, NOW()) < 24,
-        DATE_FORMAT(created_at, '%H:%i:%s'),
-        DATE_FORMAT(created_at, '%Y-%m-%d')
-    ) AS formatted_date
-FROM boards;
+SELECT DATE_FORMAT(created_at, '%y-%m-%d') AS created_at FROM announce;
 
+INSERT INTO announce(title,content) VALUES('test announce','test announce');
 
 ```

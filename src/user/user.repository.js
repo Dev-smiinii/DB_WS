@@ -55,7 +55,7 @@ exports.userFindOne = async (userid) => {
 exports.update = async (userid, modify_pw) => {
   try {
     const sql = `UPDATE user_info SET userid=?, userpw=? WHERE userid=?`;
-    const [result] = await pool.query(sql, [userid, modify_pw, userid]);
+    await pool.query(sql, [userid, modify_pw, userid]);
   } catch (err) {
     throw new Error("repo err" + err.message);
   }
