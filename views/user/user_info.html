@@ -6,59 +6,75 @@
     <title>USERINFO</title>
     <style>
       body {
-        background-color: #f4f4f4;
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: column;
         height: 100vh;
+        margin: 0;
+        background-color: #f8f9fa; /* Light grey */
       }
-      p {
-        margin-bottom: 20px;
+
+      .user-info {
+        background-color: #ffffff; /* White */
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+      }
+
+      .user-info p {
         font-size: 20px;
+        margin-bottom: 20px;
       }
 
-      a {
-        text-decoration: none; /* Remove underline */
-        color: black; /* Set text color to black */
-        background-color: #ddd;
-        padding: 10px 20px;
-        border-radius: 5px;
+      .user-info a {
+        color: #007bff;
+        text-decoration: none;
         margin-right: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #007bff;
       }
 
-      a:hover {
-        background-color: #ccc;
-      }
-
-      a:visited {
-        color: black; /* Set visited link color to black */
-      }
-
-      button {
-        width: auto;
-        height: auto;
-        background-color: #007bff;
+      .user-info a:hover {
         color: white;
-        font-size: 16pt;
-        padding: 10px 20px;
+        background-color: #007bff;
+      }
+
+      form button {
+        display: block; /* Make the button a block element */
+        margin: 20px 0; /* Add some margin at the top */
+
+        padding: 10px;
+        border-radius: 5px;
         border: none;
-        margin-top: 10px;
+        color: white;
+        background-color: #dc3545; /* Red */
+      }
+
+      form button:hover {
+        background-color: #c82333; /* Dark red */
       }
     </style>
   </head>
   <body>
     {% if user %}
-    <p>ID : {{userid}}</p>
-    <a href="/users/usermodify">수정</a>
-    <form action="/users/delete" method="post">
-      <button type="submit">탈퇴</button>
-    </form>
-    <a href="/boards/list">목록으로</a>
-    <a href="/users/logout">로그아웃</a>
+    <div class="user-info">
+      <p>ID : {{userid}}</p>
+
+      <a href="/users/usermodify">수정</a>
+
+      <form action="/users/delete" method="post">
+        <button type="submit">탈퇴</button>
+      </form>
+
+      <a href="/boards/list">목록으로</a>
+      <a href="/users/logout">로그아웃</a>
+    </div>
     {% else %}
-    <p>로그인하세요.</p>
-    <a href="/">홈으로</a>
+    <div class="user-info">
+      <p>로그인하세요.</p>
+      <a href="/">홈으로</a>
+    </div>
     {% endif %}
   </body>
 </html>

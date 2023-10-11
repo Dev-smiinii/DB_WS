@@ -4,83 +4,87 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LIST</title>
-
-    <!-- Add Custom CSS -->
     <style>
       body {
-        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
         margin: 0;
-        padding: 0;
-        background-color: #f1f1f1;
+        background-color: #f8f9fa; /* Light grey */
       }
 
       .container {
-        width: 80%;
-        margin: auto;
-        background-color: white;
-        padding: 20px;
+        width: 80vw;
+        max-height: 90vh; /* Limit the height to prevent overflow */
+        overflow-y: auto; /* Enable vertical scrolling if needed */
+        background-color: #ffffff; /* White */
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
       }
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-
-      th,
-      td {
-        border-bottom: 1px solid #ddd;
-        padding: 10px;
-        text-align: center;
-      }
-
-      th {
-        background-color: #eee;
-      }
-
-      a {
-        color: #333;
-        text-decoration: none;
-      }
-
-      a:hover {
-        color: #007bff;
-      }
-
-      .actions {
-        display: flex;
-        justify-content: flex-end;
-        gap: 10px;
-        margin-top: 30px;
-      }
-
-      h2 {
-        text-align: center;
+      .container h2 {
+        font-size: 30px;
+        margin-bottom: 20px;
       }
 
       .top-actions {
         display: flex;
         justify-content: flex-end;
-        gap: 10px;
-        margin-bottom: 30px;
+        align-items: center;
+        gap: 20 px;
       }
 
-      tr:hover {
-        background-color: #f5f5f5;
+      .container a {
+        color: #007bff;
+        text-decoration: none;
+        padding: 10px;
+        border-radius: 5px;
+      }
+
+      table a {
+        border: none;
+      }
+
+      .container a:hover {
+        color: white;
+        background-color: #007bff;
+      }
+
+      table {
+        width: 100%;
+        text-align: center;
+        border-collapse: collapse;
+      }
+
+      th,
+      td {
+        padding: 15px;
+        border-bottom: 1 px solid #ddd;
+      }
+
+      .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 20 px;
+      }
+
+      .pagination a {
+        margin-right: 10 px;
       }
     </style>
   </head>
 
   <body>
     <div class="container">
-      {% if user%}
+      {% if user %}
       <h2>자유게시판</h2>
 
       <div class="top-actions">
         <div>{{user.userid}}</div>
-        &nbsp;&nbsp;<a href="/users/userinfo">회원정보보기 </a>&nbsp;&nbsp;<a
-          href="/users/logout"
-          >로그아웃</a
-        >
+        <a href="/users/userinfo">회원정보보기</a>
+        <a href="/users/logout">로그아웃</a>
       </div>
 
       <table>
@@ -91,6 +95,7 @@
           <th>작성일</th>
           <th>조회수</th>
         </tr>
+
         {% for data in list %}
         <tr>
           <td>{{data.id}}</td>
@@ -101,6 +106,15 @@
         </tr>
         {% endfor %}
       </table>
+
+      <div class="pagination">
+        {% if pagination.prevEnd > 0 %}
+        <a href="/boards/list?page={{pagination.prevEnd}}">이전</a>{% endif %}
+        {% for i in range(pagination.start,pagination.end+1)%}
+        <a href="/boards/list?page={{i}}">{{i}}</a>{%endfor%} {% if
+        pagination.nextStart %}
+        <a href="/boards/list?page={{pagination.nextStart}}">다음</a>{% endif %}
+      </div>
 
       <div class="actions"><a href="/boards/write">글쓰기</a></div>
 

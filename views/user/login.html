@@ -6,107 +6,126 @@
     <title>LOGIN</title>
     <style>
       body {
-        background-color: white;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh; /* Set the height to the viewport size */
+        margin: 0;
+        background-color: #f8f9fa; /* Light grey */
       }
+
       form {
         display: flex;
         flex-direction: column; /* Stack the inputs vertically */
-        background-color: rgb(
-          233,
-          233,
-          233
-        ); /* Set the form background color to light gray */
-        padding: 20px; /* Add some space around the form content */
-        border-radius: 10px; /* Add rounded corners to the form */
-        width: 60%;
-        max-width: 600px;
+
+        background-color: #ffffff; /* White */
+
+        padding: 30px; /* Add some space around the form content */
+
+        border-radius: 15px; /* Add rounded corners to the form */
+
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+
+        width: auto;
+
         align-items: center;
+
+        margin-bottom: 20 px;
       }
 
       a {
-        position: absolute;
-        top: 50px;
-        left: 50%;
-        transform: translateX(-50%);
+        color: #007bff;
+
         text-decoration: none;
 
-        /* Styling for "Home" button */
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        border: none;
-        border-radius: 5px;
+        padding: 10 px;
 
-        /* Transition effect for hover action */
-        transition-duration: 0.3s;
+        border-radius: 5 px;
+
+        border: 1px solid #007bff;
       }
 
       a:hover {
-        background-color: #0056b3;
-      }
+        color: white;
 
-      ul {
-        list-style-type: none;
-        padding-left: 0;
-      }
-
-      li {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        gap: 30px;
-      }
-
-      h2 {
-        width: 100px;
-        text-align: right;
-      }
-      input {
-        flex-grow: 1;
-      }
-
-      input {
-        height: 40px;
-        font-size: 16pt;
-
-        outline: none !important;
-
-        border-radius: 0.3em;
-
-        background: #f9f9f9;
-
-        box-sizing: border-box;
+        background-color: #007bff;
       }
 
       button {
-        width: 20%;
-        height: 40px;
-        background-color: black;
-        color: white;
-        font-size: 16pt;
-        font-weight: bold;
+        display: inline-block;
+
+        padding: 10 px;
+
+        border-radius: 5 px;
+
         border: none;
+
+        color: white;
+
+        background-color: #dc3545;
+      }
+
+      button:hover {
+        background-color: #c82333;
+      }
+
+      h2 {
+        width: auto;
+
+        text-align: left !important ;
+      }
+
+      input {
+        height: auto !important ;
+
+        font-size: auto !important ;
+
+        outline: none !important ;
+
+        border-radius: 0.3em !important ;
+
+        background: #f9f9f9 !important ;
+
+        box-sizing: border-box;
+        flex-grow: auto !important ;
+      }
+
+      h1,
+      ul,
+      li {
+        font-size: auto !important ;
+
+        margin-bottom: auto !important;
+      }
+
+      ul {
+        list-style-type: none; /* Remove bullet points from list items*/
+        padding-left: 0; /* Remove default padding from list items*/
+      }
+
+      li {
+        display: flex; /* Display as flex to align label and input on same line */
+        align-items: center; /* Align items vertically in center */
+        gap: 10px; /* Provide gap between label and input field */
       }
     </style>
   </head>
-  <body>
-    <a href="/">홈으로</a>
 
+  <body>
     {% if alert %}
+
     <script>
       alert("로그인 실패");
     </script>
+
     {% endif %}
+
     <form action="/users/login" method="post">
       <h1>로그인</h1>
+
       <ul>
         <li>
-          <h2>ID</h2>
+          <h2>ID:</h2>
           <input
             type="text"
             name="user_id"
@@ -115,8 +134,9 @@
           />
         </li>
         <br />
+
         <li>
-          <h2>PW</h2>
+          <h2>PW:</h2>
           <input
             type="password"
             name="user_pw"
@@ -125,8 +145,9 @@
           />
         </li>
         <br />
+
+        <li><button type="submit">로그인</button> <a href="/">홈으로</a></li>
       </ul>
-      <button type="submit">로그인</button>
     </form>
   </body>
 </html>

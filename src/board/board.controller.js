@@ -28,7 +28,7 @@ exports.getList = async (req, res, next) => {
     const totalCount = await boardService.getTotalCount();
 
     const countList = result.length;
-    const countPage = 5;
+    const countPage = 10;
 
     let totalPage = Math.ceil(totalCount / countList);
 

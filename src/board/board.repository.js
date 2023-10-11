@@ -13,7 +13,7 @@ exports.findAllAnnounce = async () => {
 
 exports.findAll = async (page) => {
   try {
-    const limit = 20;
+    const limit = 10;
     const offset = (page - 1) * limit;
     const sql = `SELECT 
     id,
