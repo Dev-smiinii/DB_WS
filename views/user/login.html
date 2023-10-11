@@ -4,17 +4,109 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>LOGIN</title>
+    <style>
+      body {
+        background-color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh; /* Set the height to the viewport size */
+      }
+      form {
+        display: flex;
+        flex-direction: column; /* Stack the inputs vertically */
+        background-color: rgb(
+          233,
+          233,
+          233
+        ); /* Set the form background color to light gray */
+        padding: 20px; /* Add some space around the form content */
+        border-radius: 10px; /* Add rounded corners to the form */
+        width: 60%;
+        max-width: 600px;
+        align-items: center;
+      }
+
+      a {
+        position: absolute;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        text-decoration: none;
+
+        /* Styling for "Home" button */
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+
+        /* Transition effect for hover action */
+        transition-duration: 0.3s;
+      }
+
+      a:hover {
+        background-color: #0056b3;
+      }
+
+      ul {
+        list-style-type: none;
+        padding-left: 0;
+      }
+
+      li {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        gap: 30px;
+      }
+
+      h2 {
+        width: 100px;
+        text-align: right;
+      }
+      input {
+        flex-grow: 1;
+      }
+
+      input {
+        height: 40px;
+        font-size: 16pt;
+
+        outline: none !important;
+
+        border-radius: 0.3em;
+
+        background: #f9f9f9;
+
+        box-sizing: border-box;
+      }
+
+      button {
+        width: 20%;
+        height: 40px;
+        background-color: black;
+        color: white;
+        font-size: 16pt;
+        font-weight: bold;
+        border: none;
+      }
+    </style>
   </head>
   <body>
+    <a href="/">홈으로</a>
+
     {% if alert %}
     <script>
       alert("로그인 실패");
     </script>
     {% endif %}
     <form action="/users/login" method="post">
+      <h1>로그인</h1>
       <ul>
         <li>
-          <!-- <h2>ID</h2> -->
+          <h2>ID</h2>
           <input
             type="text"
             name="user_id"
@@ -24,7 +116,7 @@
         </li>
         <br />
         <li>
-          <!-- <h2>PW</h2> -->
+          <h2>PW</h2>
           <input
             type="password"
             name="user_pw"
@@ -35,8 +127,6 @@
         <br />
       </ul>
       <button type="submit">로그인</button>
-      <a href="/">홈으로</a>
-      <!-- <a href="/boards/list">로그인</a> -->
     </form>
   </body>
 </html>

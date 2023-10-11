@@ -10,11 +10,20 @@ exports.getFindAllAnnounce = async () => {
   }
 };
 
-exports.getFindAll = async () => {
+exports.getFindAll = async (page) => {
   try {
-    const result = await boardRepository.findAll();
+    const result = await boardRepository.findAll(page);
     return result;
   } catch (err) {
+    throw new Error("service err" + err.message);
+  }
+};
+
+exports.getTotalCount = async () => {
+  try {
+    const result = await boardRepository.pageTotalCount();
+    return result;
+  } catch (e) {
     throw new Error("service err" + err.message);
   }
 };
@@ -41,14 +50,9 @@ exports.getFindOne = async (id) => {
 
 // 글 쓰기
 exports.listCreate = async (data) => {
-  const { title, writer, content, writerid } = data;
+  const { title, writer, content } = data;
   try {
-    const result = await boardRepository.create(
-      title,
-      writer,
-      content,
-      writerid
-    );
+    const result = await boardRepository.create(title, writer, content);
     return result;
   } catch (err) {
     throw new Error("service err" + err.message);

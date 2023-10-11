@@ -7,7 +7,11 @@
   </head>
   <body>
     {% if user%}
-    <div>{{user.userid}}</div>
+    <div>
+      {{user.userid}}
+      <a href="/users/userinfo">회원정보</a>
+      <a href="/users/logout">로그아웃</a>
+    </div>
     <h2>안녕</h2>
     <table>
       <tr>
@@ -27,9 +31,17 @@
       </tr>
       {% endfor %}
     </table>
+    <div>
+      {% if pagination.prevEnd > 0 %}
+      <a href="/boards/list?page={{pagination.prevEnd}}">이전</a>
+      {% endif %} {% for i in range(pagination.start,pagination.end+1)%}
+      <a href="/boards/list?page={{i}}">{{i}}</a>
+      {%endfor%} {% if pagination.nextStart %}
+      <a href="/boards/list?page={{pagination.nextStart}}">다음</a>
+      {% endif %}
+    </div>
     <a href="/boards/write">글쓰기</a>
-    <a href="/users/logout">로그아웃</a>
-    <a href="/users/userinfo">회원정보</a>
+
     {% else %}
     <p>로그인하세요</p>
     <a href="/">홈으로</a>

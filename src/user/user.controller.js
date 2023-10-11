@@ -13,6 +13,7 @@ exports.postLogin = async (req, res, next) => {
     const result = await userService.userLogin(data);
     if (!result.isLogin) return res.render("user/login.html", { alert: true });
     res.cookie("token", result.data);
+    console.log(result);
     res.redirect("/boards/list");
   } catch (e) {
     next(e);
@@ -27,16 +28,15 @@ exports.getJoin = (req, res) => {
 exports.postJoin = async (req, res, next) => {
   try {
     const { new_user_id, new_user_pw } = req.body;
-    const regex = /^[0-9a-zA-Z]*$/;
 
-    if (!regex.test(new_user_id) || !regex.test(new_user_pw))
+    const regex = /^[0-9a-zA-Z]*$/;
+    if (!regex.test(new_user_id))
       return res.render("user/join.html", {
         alert: true,
         alertType: "invaild",
       });
 
     const result = await userService.userOverlap(new_user_id);
-
     if (result)
       return res.render("user/join.html", {
         alert: true,
@@ -98,7 +98,6 @@ exports.postUserModify = async (req, res, next) => {
     const userid = payload.id;
     const { modify_pw } = req.body;
     const result = await userService.userUpdate(userid, modify_pw);
-    console.log(result);
 
     res.redirect(`/users/userinfo`);
   } catch (e) {

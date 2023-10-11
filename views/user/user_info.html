@@ -4,6 +4,48 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>USERINFO</title>
+    <style>
+      body {
+        background-color: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+      }
+      p {
+        margin-bottom: 20px;
+        font-size: 20px;
+      }
+
+      a {
+        text-decoration: none; /* Remove underline */
+        color: black; /* Set text color to black */
+        background-color: #ddd;
+        padding: 10px 20px;
+        border-radius: 5px;
+        margin-right: 10px;
+      }
+
+      a:hover {
+        background-color: #ccc;
+      }
+
+      a:visited {
+        color: black; /* Set visited link color to black */
+      }
+
+      button {
+        width: auto;
+        height: auto;
+        background-color: #007bff;
+        color: white;
+        font-size: 16pt;
+        padding: 10px 20px;
+        border: none;
+        margin-top: 10px;
+      }
+    </style>
   </head>
   <body>
     {% if user %}
