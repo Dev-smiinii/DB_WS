@@ -5,70 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WRITE</title>
     <style>
-         body {
-           display: flex;
-           justify-content: center;
-           align-items: center;
-           height: 100vh;
-           margin: 0;
-           background-color: #f8f9fa; /* Light grey */
-         }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f8f9fa; /* Light grey */
+      }
 
-         form {
-           width: 60%;
-           height: 80%;
-           background-color: #ffffff; /* White */
-           padding: 30px;
-           border-radius: 15px;
-           box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
-         }
+      form {
+        position: relative;
+        width: 60%;
+        height: 80%;
+        background-color: #ffffff; /* White */
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0px 0PX10PX rgba(0, 0, 0, 0.1); /* Shadow effect*/
+      }
 
-         form p {
-             font-size :20PX ;
-              margin-bottom :20PX ;
-          }
+      form input,
+      textarea {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #007bff;
+      }
 
-          form input ,textarea{
-               padding :10PX ;
-               border-radius :5PX ;
-               border :1PX solid #007bff ;
-          }
+      #golist {
+        border-radius: 5px;
+        border: none;
+        padding: 12px 22px;
+        margin-right: 22px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 900;
+        margin-top: 5px;
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        top: 90%;
+        transform: translateY(-50%);
+      }
 
-          ul{
-              display:flex;
-              justify-content :space-between ;
-            }
+      #golist:hover {
+        background-color: #0056b3;
+      }
 
-            button[type=submit]{
-                order:-1;
-            }
+      button[type="submit"] {
+        order: -1;
+      }
 
-        form button {
-             display:block;
-             padding :10PX ;
-             border-radius :5PX ;
-             border:none ; color:white ;
-              background-color:#007bff ;
+      form button {
+        margin-top: 30px;
+        padding: 11px 22px;
+        border-radius: 5px;
+        border: none;
+        color: white;
+        font-size: 15px;
+        font-weight: 900;
+        background-color: #007bff;
+      }
 
-        }
+      form button:hover {
+        background-color: #0056b3;
+      }
 
-        form button:hover{
-             background-color:#0056b3 ;
+      .row-flex-container {
+        display: flex;
+        justify-content: start;
+        align-items: center; /* Add this line */
+      }
 
-        }
-
-        a{
-             color:#007bff ;
-              text-decoration:none ;
-               margin-right :10PX ; padding :10PX ;border-radius
-                solid #007bff ;
-
-        }
-
-       a:hover{
-              color:white ;
-               background-color:#007bff ;
-
+      .button-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
       }
     </style>
   </head>
@@ -76,29 +89,32 @@
   <body>
     {% if user %}
     <form action="/boards/write" method="post">
-      <div style="display: flex; align-items: center">
-        <p style="margin-right: auto">제목 :</p>
+      <div class="row-flex-container">
+        <p style="margin-right: 20px; line-height: normal">제목 :</p>
         <input
           type="text"
           name="title"
           required
           oninvalid="setCustomValidity('제목을 입력해주세요.')"
           oninput="setCustomValidity('')"
-          style="margin-left: auto"
+          style="margin-left: 20px; width: 50%; line-height: normal"
         />
-      </div>
 
-      <div style="display: flex">
-        <p style="margin-right: auto">작성자 :</p>
+        <p style="margin-left: auto; margin-right: 20px">작성자 :</p>
         <p>{{userid}}</p>
       </div>
 
       <input type="hidden" name="writer" value="{{userid}}" />
       <p>내용 :</p>
-      <textarea name="content" style="height: 50%; resize: none"></textarea>
+      <textarea
+        name="content"
+        style="width: 98%; height: 70%; resize: none"
+      ></textarea>
       <button type="submit">저장</button>
+      <a href="/boards/list" id="golist">목록으로</a>
     </form>
-    <a href="/users/logout">로그아웃</a>{% else %}
+
+    {% else %}
     <p>로그인하세요.</p>
     <a href="/">홈으로</a>{% endif %}
   </body>

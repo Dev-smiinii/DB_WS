@@ -4,21 +4,93 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>VIEW</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f8f9fa; /* Light grey */
+      }
+
+      form {
+        position: relative;
+        width: 60%;
+        height: 50%; /* Modified to auto for better content fitting */
+        background-color: #ffffff; /* White */
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0px 0PX10PX rgba(0, 0, 0, 0.1); /* Shadow effect*/
+      }
+
+      form button,
+      a {
+        padding: 11px 22px;
+        border-radius: 5px;
+        border: none;
+        color: white;
+        font-size: 15px;
+        font-weight: bold;
+      }
+
+      form button[type="submit"] {
+        background-color: #007bff;
+        order: -1;
+      }
+
+      a {
+        text-decoration: none;
+        background-color: #007bff;
+        margin-top: 20px;
+        display: inline-block;
+      }
+
+      form button:hover,
+      a:hover {
+        background-color: #0056b3;
+        text-decoration: none;
+        color: white;
+      }
+
+      .row-flex-container {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+      }
+
+      .button-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    </style>
   </head>
+
   <body>
     {% if user %}
-    <p>제목: {{title}}</p>
-    <p>작성자: {{writer}}</p>
-    <p>내용: {{content}}</p>
-    <a href="/boards/modify?id={{id}}">수정</a>
     <form action="/boards/delete?id={{id}}" method="post">
+      <p class="row-flex-container">
+        제목:<span style="margin-left: 10px">{{title}}</span>
+      </p>
+      <p class="row-flex-container">
+        작성자:<span style="margin-left: 10px">{{writer}}</span>
+      </p>
+
+      <p>내용:</p>
+      <textarea readonly style="width: 98%; height: 60%; resize: none">
+{{content}}</textarea
+      >
+
       <button type="submit">삭제</button>
+
+      <a href="/boards/modify?id={{id}}">수정</a>
+
+      <a href="/boards/list">목록으로</a>
+
+      {% else %}
+      <p>로그인하세요.</p>
+      <a href="/">홈으로</a>{% endif %}
     </form>
-    <a href="/boards/list">목록으로</a>
-    <a href="/users/logout">로그아웃</a>
-    {% else %}
-    <p>로그인하세요</p>
-    <a href="/">홈으로</a>
-    {% endif %}
   </body>
 </html>

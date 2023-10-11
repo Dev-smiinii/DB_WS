@@ -9,106 +9,68 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh; /* Set the height to the viewport size */
+        height: 100vh;
         margin: 0;
         background-color: #f8f9fa; /* Light grey */
       }
 
       form {
-        display: flex;
-        flex-direction: column; /* Stack the inputs vertically */
-
+        position: relative;
+        width: 40%; /* Reduced from 60% to 40% */
+        height: 50%; /* Reduced from 80% to 50% */
         background-color: #ffffff; /* White */
+        padding: 30px;
 
-        padding: 30px; /* Add some space around the form content */
-
-        border-radius: 15px; /* Add rounded corners to the form */
-
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
-
-        width: auto;
-
+        display: flex;
+        flex-direction: column;
         align-items: center;
+        justify-content: center;
+      }
 
-        margin-bottom: 20 px;
+      form input {
+        margin-left: 10px;
+        padding: 5px;
+        border-radius: 5px;
+        border: 1px solid #007bff;
+        width: 70%;
+      }
+
+      form input:first-child {
+        margin-left: 15px;
+      }
+
+      form button {
+        background-color: #007bff;
+        margin-right: 20px;
+      }
+
+      h1 {
+        margin-bottom: 20px !important ;
+      }
+
+      button[type="submit"],
+      a {
+        order: -1;
+        margin-top: 30px;
+        padding: 11px;
+        border-radius: 5px;
+        border: none;
+        color: white;
+        text-decoration: none;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #0056b3;
       }
 
       a {
-        color: #007bff;
-
-        text-decoration: none;
-
-        padding: 10 px;
-
-        border-radius: 5 px;
-
-        border: 1px solid #007bff;
+        order: -1;
+        padding-left: 22px !important ;
+        padding-right: 22px !important ;
       }
 
       a:hover {
-        color: white;
-
-        background-color: #007bff;
-      }
-
-      button {
-        display: inline-block;
-
-        margin-right: 10px;
-
-        padding: 10 px;
-
-        border-radius: 5 px;
-
-        border: none;
-
-        color: white;
-
-        background-color: #dc3545;
-      }
-
-      button:hover {
-        background-color: #c82333;
-      }
-
-      h2 {
-        width: auto;
-
-        text-align: left !important ;
-      }
-
-      input {
-        height: auto !important ;
-
-        font-size: auto !important ;
-
-        outline: none !important ;
-
-        border-radius: 0.3em !important ;
-
-        background: #f9f9f9 !important ;
-
-        box-sizing: border-box;
-        flex-grow: auto !important ;
-      }
-
-      h1,
-      ul,
-      li {
-        font-size: auto !important ;
-
-        margin-bottom: auto !important;
-      }
-
-      ul {
-        list-style-type: none; /* Remove bullet points from list items*/
-        padding-left: 0; /* Remove default padding from list items*/
-      }
-
-      li {
-        display: flex; /* Display as flex to align label and input on same line */
-        align-items: center; /* Align items vertically in center */
-        gap: 10px; /* Provide gap between label and input field */
+        background-color: #0056b3;
       }
     </style>
   </head>
@@ -122,12 +84,10 @@
       switch ("{{alertType}}") {
         case "invaild":
           message = "알파벳, 숫자로 된 아이디를 입력해주십시오.";
-
           break;
 
         case "overlap":
           message = "중복된 아이디입니다.";
-
           break;
 
         default:
@@ -142,9 +102,9 @@
     <form action="/users/join" method="post">
       <h1>회원가입</h1>
 
-      <ul>
-        <li>
-          <h2>ID</h2>
+      <ul style="list-style-type: none">
+        <li style="display: flex; justify-content: center; margin-bottom: 20px">
+          <h2>ID:</h2>
           <input
             type="text"
             name="new_user_id"
@@ -152,12 +112,13 @@
             required
             oninvalid="this.setCustomValidity('ID를 작성해주세요')"
             oninput="this.setCustomValidity('')"
+            style="margin-left: 50px"
           />
         </li>
         <br />
 
-        <li>
-          <h2>PW</h2>
+        <li style="display: flex; justify-content: center; margin-bottom: 20px">
+          <h2>PW:</h2>
           <input
             type="password"
             name="new_user_pw"
@@ -165,13 +126,16 @@
             required
             oninvalid="this.setCustomValidity('password를 작성해주세요')"
             oninput="this.setCustomValidity('')"
+            style="margin-left: 35px"
           />
         </li>
         <br />
 
-        <li>
+        <li style="display: flex; justify-content: center">
           <button type="submit">회원가입</button>
-          <a href="/" id="home">홈으로</a>
+          <a href="/" style="background-color: #007bff; padding: 11px 22px"
+            >홈으로</a
+          >
         </li>
       </ul>
     </form>

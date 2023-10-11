@@ -4,21 +4,115 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MODIFY</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f8f9fa; /* Light grey */
+      }
+
+      form {
+        position: relative;
+        width: 60%;
+        height: 80%;
+        background-color: #ffffff; /* White */
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0px 0PX10PX rgba(0, 0, 0, 0.1); /* Shadow effect*/
+      }
+
+      form input,
+      textarea {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #007bff;
+      }
+
+      #golist {
+        border-radius: 5px;
+        border: none;
+        padding: 12px 22px;
+        margin-right: 22px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 900;
+        margin-top: 5px;
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        top: 90%;
+        transform: translateY(-50%);
+      }
+
+      #golist:hover {
+        background-color: #0056b3;
+      }
+
+      button[type="submit"] {
+        order: -1;
+      }
+
+      form button {
+        margin-top: 30px;
+        padding: 11px 22px;
+        border-radius: 5px;
+        border: none;
+        color: white;
+        font-size: 15px;
+        font-weight: 900;
+        background-color: #007bff;
+      }
+
+      form button:hover {
+        background-color: #0056b3;
+      }
+
+      .row-flex-container {
+        display: flex;
+        justify-content: start;
+        align-items: center; /* Add this line */
+      }
+
+      .button-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    </style>
   </head>
+
   <body>
     {% if user %}
     <form action="/boards/modify?id={{id}}" method="post">
-      <p>
-        제목 : <input type="text" name="title" value="{{title}}" required />
-      </p>
-      <p>작성자 : {{writer}}</p>
-      <textarea name="content">{{content}}</textarea>
+      <div class="row-flex-container">
+        <p style="margin-right: 20px; line-height: normal">제목 :</p>
+        <input
+          type="text"
+          name="title"
+          value="{{title}}"
+          required
+          style="margin-left: 20px; width: 50%; line-height: normal"
+        />
+
+        <p style="margin-left: auto; margin-right: 20px">작성자 :</p>
+        <p>{{writer}}</p>
+      </div>
+      <p>내용 :</p>
+      <textarea name="content" style="width: 98%; height: 70%; resize: none">
+          {{content}}</textarea
+      >
       <button type="submit">저장</button>
+
+      <a href="/boards/list" id="golist">목록으로</a>
     </form>
-    <a href="/users/logout">로그아웃</a>
     {% else %}
-    <p>로그인하세요</p>
-    <a href="/">홈으로</a>
-    {% endif %}
+
+    <p>로그인하세요.</p>
+    <a href="/">홈으로</a>{% endif %}
   </body>
 </html>
