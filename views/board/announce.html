@@ -15,48 +15,74 @@
       }
 
       .container {
-        width: 80vw;
-        max-height: 90vh; /* Limit the height to prevent overflow */
-        overflow-y: auto; /* Enable vertical scrolling if needed */
+        position: relative;
+        width: 30%;
+        height: 40%;
         background-color: #ffffff; /* White */
         padding: 30px;
         border-radius: 15px;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+        box-shadow: 0px 0PX10PX rgba(0, 0, 0, 0.1);
       }
 
-      .container h2 {
-        font-size: 30px;
-        margin-bottom: 20 px;
-      }
-
-      .container a {
-        color: #007bff;
-        text-decoration: none;
-        padding: 10 px;
-        border-radius: 5 px;
-      }
-
-      .container a:hover {
+      .container button,
+      a {
+        padding: 11px 22px;
+        border-radius: 5px;
+        border: none;
         color: white;
+        font-size: 15px;
+        font-weight: bold;
+      }
+
+      .container button[type="submit"] {
         background-color: #007bff;
+        order: -1;
+      }
+
+      a {
+        text-decoration: none;
+        background-color: #007bff;
+        margin-top: 20px;
+        display: inline-block;
+      }
+
+      button:hover,
+      a:hover {
+        background-color: #0056b3;
+        text-decoration: none;
+        color: white;
+      }
+
+      row-flex-container {
+        display: flex;
+        justify-content: start;
+        align-items: center;
+      }
+
+      button-container {
+        display: flex;
+        justify-content: end;
+        align-items: center;
       }
     </style>
   </head>
-
   <body>
     <div class="container">
       <h2>ANNOUNCEMENT</h2>
 
-      <p>제목 :</p>
-      {{ title }}
+      <p class="row-flex-container">
+        제목:<span style="margin-left: 10px">{{ title }}</span>
+      </p>
 
-      <p>내용 :</p>
-      {{ content }}
+      <p class="row-flex-container">
+        내용:<span style="margin-left: 10px">{{ content }}</span>
+      </p>
 
-      <p>작성일 :</p>
-      {{ created_at }}
+      <p class="row-flex-container">
+        작성일:<span style="margin-left: 10px">{{ created_at }}</span>
+      </p>
 
-      <!-- Add the same styling to this link as well -->
+      <a href="/">홈으로</a>
     </div>
   </body>
 </html>
